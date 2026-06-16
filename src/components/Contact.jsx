@@ -20,7 +20,7 @@ export default function Contact() {
               className="contact-icon-link location"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Open Shiv Sakti Mobile location on Google Maps"
+              aria-label="Open Shiv Shakti Mobile location on Google Maps"
             >
               <MapPin size={22} aria-hidden="true" />
             </a>
@@ -36,7 +36,7 @@ export default function Contact() {
             <a
               href={PHONE_LINK}
               className="contact-icon-link phone"
-              aria-label={`Call Shiv Sakti Mobile at ${PHONE_NUMBER}`}
+              aria-label={`Call Shiv Shakti Mobile at ${PHONE_NUMBER}`}
             >
               <Phone size={22} aria-hidden="true" />
             </a>
@@ -54,7 +54,7 @@ export default function Contact() {
               className="contact-icon-link whatsapp"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Chat with Shiv Sakti Mobile on WhatsApp"
+              aria-label="Chat with Shiv Shakti Mobile on WhatsApp"
             >
               <FaWhatsapp size={23} aria-hidden="true" />
             </a>
@@ -74,7 +74,7 @@ export default function Contact() {
               className="contact-icon-link instagram"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Open Shiv Sakti Mobile Instagram profile"
+              aria-label="Open Shiv Shakti Mobile Instagram profile"
             >
               <FaInstagram size={22} aria-hidden="true" />
             </a>
@@ -134,7 +134,7 @@ export default function Contact() {
               className="map-icon-link"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Open Shiv Sakti Mobile on Google Maps"
+              aria-label="Open Shiv Shakti Mobile on Google Maps"
             >
               <MapPin size={42} aria-hidden="true" />
             </a>

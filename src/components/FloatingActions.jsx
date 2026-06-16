@@ -13,14 +13,14 @@ export default function FloatingActions() {
         className="floating-action whatsapp"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat with Shiv Sakti Mobile on WhatsApp"
+        aria-label="Chat with Shiv Shakti Mobile on WhatsApp"
       >
         <FaWhatsapp size={28} aria-hidden="true" />
       </a>
       <a
         href={PHONE_LINK}
         className="floating-action call"
-        aria-label="Call Shiv Sakti Mobile at +91 8877771149"
+        aria-label="Call Shiv Shakti Mobile at +91 8877771149"
       >
         <Phone size={25} aria-hidden="true" />
       </a>

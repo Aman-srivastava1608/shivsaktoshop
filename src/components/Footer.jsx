@@ -15,14 +15,14 @@ export default function Footer() {
         <div>
           <div className="footer-logo">
             <Smartphone size={20} aria-hidden="true" />
-            Shiv Sakti Mobile
+            Shiv Shakti Mobile
           </div>
           <p className="footer-tagline">Muzaffarpur's Trusted Mobile Store</p>
           <div className="footer-contact-links">
             <a
               href={PHONE_LINK}
               className="footer-contact-link phone"
-              aria-label={`Call Shiv Sakti Mobile at ${PHONE_NUMBER}`}
+              aria-label={`Call Shiv Shakti Mobile at ${PHONE_NUMBER}`}
             >
               <Phone size={17} aria-hidden="true" />
               <span>{PHONE_NUMBER}</span>
@@ -32,7 +32,7 @@ export default function Footer() {
               className="footer-contact-link whatsapp"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Chat with Shiv Sakti Mobile on WhatsApp"
+              aria-label="Chat with Shiv Shakti Mobile on WhatsApp"
             >
               <FaWhatsapp size={17} aria-hidden="true" />
               <span>WhatsApp</span>
@@ -42,7 +42,7 @@ export default function Footer() {
               className="footer-contact-link instagram"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Open Shiv Sakti Mobile Instagram profile"
+              aria-label="Open Shiv Shakti Mobile Instagram profile"
             >
               <FaInstagram size={17} aria-hidden="true" />
               <span>@shiv_shakti_mobile_muzaffarpur</span>
@@ -52,7 +52,7 @@ export default function Footer() {
               className="footer-contact-link maps"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Open Shiv Sakti Mobile location on Google Maps"
+              aria-label="Open Shiv Shakti Mobile location on Google Maps"
             >
               <MapPin size={17} aria-hidden="true" />
               <span>View on Google Maps</span>
@@ -67,7 +67,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>&copy; 2025 Shiv Sakti Mobile, Muzaffarpur, Bihar. All rights reserved.</p>
+        <p>&copy; 2025 Shiv Shakti Mobile, Muzaffarpur, Bihar. All rights reserved.</p>
       </div>
     </footer>
   );

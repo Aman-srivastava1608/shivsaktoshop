@@ -6,7 +6,7 @@ export default function Navbar() {
       <div className="navbar-logo">
         <div className="logo-icon">📱</div>
         <div>
-          <div className="logo-name">Shiv Sakti Mobile</div>
+          <div className="logo-name">Shiv Shakti Mobile</div>
           <div className="logo-sub">Muzaffarpur, Bihar</div>
         </div>
       </div>
