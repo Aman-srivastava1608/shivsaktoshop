@@ -1,0 +1,180 @@
+.brands-section {
+  --ticker-gap: 18px;
+  --ticker-speed: 30s;
+  background: white;
+  padding: 60px 48px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.brands-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.brand-ticker {
+  position: relative;
+  overflow: hidden;
+  padding: 12px 0 20px;
+  mask-image: linear-gradient(90deg, transparent 0, black 9%, black 91%, transparent 100%);
+}
+
+.brand-ticker::before,
+.brand-ticker::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 84px;
+  pointer-events: none;
+}
+
+.brand-ticker::before {
+  left: 0;
+  background: linear-gradient(90deg, white 0%, rgba(255,255,255,0) 100%);
+}
+
+.brand-ticker::after {
+  right: 0;
+  background: linear-gradient(270deg, white 0%, rgba(255,255,255,0) 100%);
+}
+
+.brand-ticker-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: brand-ticker-scroll var(--ticker-speed) linear infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+.brand-ticker:hover .brand-ticker-track {
+  animation-play-state: paused;
+}
+
+.brand-logo-set {
+  display: flex;
+  align-items: center;
+  gap: var(--ticker-gap);
+  padding-right: var(--ticker-gap);
+}
+
+.brand-logo-card {
+  width: 150px;
+  min-width: 150px;
+  height: 94px;
+  border-radius: 12px;
+  border: 1px solid #E3F2FD;
+  background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 8px 20px rgba(13, 71, 161, 0.06);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.brand-logo-card:hover {
+  transform: translateY(-4px) scale(1.06);
+  border-color: #BBDEFB;
+  box-shadow: 0 16px 32px rgba(21, 101, 192, 0.16);
+}
+
+.brand-logo-icon {
+  width: 64px;
+  height: 34px;
+  flex-shrink: 0;
+}
+
+.brand-svg-logo {
+  width: 76px;
+  height: auto;
+  display: block;
+}
+
+.brand-logo-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+}
+
+@keyframes brand-ticker-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (max-width: 900px) {
+  .brands-section {
+    --ticker-gap: 14px;
+    --ticker-speed: 26s;
+    padding: 56px 32px;
+  }
+
+  .brand-logo-card {
+    width: 128px;
+    min-width: 128px;
+    height: 86px;
+  }
+
+  .brand-logo-icon {
+    width: 58px;
+    height: 31px;
+  }
+}
+
+@media (max-width: 700px) {
+  .brands-section {
+    --ticker-gap: 12px;
+    --ticker-speed: 22s;
+    padding: 48px 24px;
+  }
+
+  .brand-ticker {
+    mask-image: linear-gradient(90deg, transparent 0, black 14%, black 86%, transparent 100%);
+  }
+
+  .brand-ticker::before,
+  .brand-ticker::after {
+    width: 42px;
+  }
+
+  .brand-logo-card {
+    width: 112px;
+    min-width: 112px;
+    height: 78px;
+    border-radius: 10px;
+  }
+
+  .brand-logo-icon {
+    width: 50px;
+    height: 28px;
+  }
+
+  .brand-svg-logo {
+    width: 64px;
+  }
+
+  .brand-logo-name {
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brands-section {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .brand-ticker-track {
+    animation: none;
+  }
+}
