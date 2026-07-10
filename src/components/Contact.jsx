@@ -1,4 +1,4 @@
-import { Clock, MapPin, Navigation, Phone } from "lucide-react";
+import { ArrowRight, Clock, MapPin, Navigation, Phone } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import "./Contact.css";
@@ -155,7 +155,8 @@ export default function Contact() {
               rel="noopener noreferrer"
               className="map-btn"
             >
-              Get Directions -&gt;
+              Get Directions
+              <ArrowRight size={16} aria-hidden="true" />
             </a>
           </div>
         </div>

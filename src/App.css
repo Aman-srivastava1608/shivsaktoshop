@@ -16,6 +16,7 @@
   --color-muted: #475569;
   --shadow-sm: 0 8px 20px rgba(14, 116, 144, 0.08);
   --shadow-md: 0 18px 42px rgba(14, 116, 144, 0.14);
+  --shadow-lg: 0 26px 70px rgba(12, 74, 110, 0.18);
   --shadow-focus: 0 0 0 3px rgba(249, 115, 22, 0.28);
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -45,7 +46,7 @@ body {
 }
 
 section {
-  padding: 60px 24px;
+  padding: 56px 24px;
 }
 
 .section-title {
@@ -95,14 +96,14 @@ button:focus-visible {
 
 @media (max-width: 700px) {
   section {
-    padding: 48px 20px;
+    padding: 44px 20px;
   }
 
   .section-title {
     align-items: flex-start;
     flex-direction: column;
     gap: 12px;
-    margin-bottom: 24px;
+    margin-bottom: 22px;
   }
 
   .section-title::after {

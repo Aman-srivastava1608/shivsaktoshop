@@ -1,4 +1,4 @@
-import { MapPin, Phone, Smartphone } from "lucide-react";
+import { ArrowRight, Image, MapPin, Phone, Smartphone } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import "./Hero.css";
 
@@ -44,7 +44,10 @@ export default function Hero() {
             <Phone size={18} aria-hidden="true" />
             Call Now
           </a>
-          <a href="#brands" className="btn-secondary">Explore Brands -&gt;</a>
+          <a href="#brands" className="btn-secondary">
+            Explore Brands
+            <ArrowRight size={17} aria-hidden="true" />
+          </a>
         </motion.div>
       </div>
       <motion.div
@@ -53,8 +56,15 @@ export default function Hero() {
         animate={reduceMotion ? {} : { opacity: 1, scale: 1 }}
         transition={{ duration: 0.55, delay: reduceMotion ? 0 : 0.18, ease: "easeOut" }}
       >
-        <div className="phone-mockup">
-          <Smartphone size={118} strokeWidth={1.6} aria-hidden="true" />
+        <div className="hero-media-frame" aria-hidden="true">
+          <div className="hero-media-surface">
+            <div className="hero-media-icon">
+              <Image size={34} strokeWidth={1.8} />
+            </div>
+            <div className="hero-device-outline">
+              <Smartphone size={82} strokeWidth={1.5} />
+            </div>
+          </div>
           <span className="mockup-chip">Latest Models</span>
         </div>
       </motion.div>

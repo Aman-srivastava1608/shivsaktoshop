@@ -47,7 +47,7 @@
   background: #EA580C;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 767px) {
   .floating-actions {
     right: 16px;
     bottom: 16px;
@@ -61,5 +61,9 @@
 
   .floating-action.call {
     display: inline-flex;
+  }
+
+  .floating-actions.is-happy-customers-visible .floating-action.call {
+    display: none;
   }
 }

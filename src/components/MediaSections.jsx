@@ -47,8 +47,14 @@ const customerVideos = toMediaItems(customerVideoFiles, "Customer video");
 export default function MediaSections() {
   const [activeShopImage, setActiveShopImage] = useState(null);
   const [activeOffer, setActiveOffer] = useState(0);
+  const [isCustomerInteracting, setIsCustomerInteracting] = useState(false);
+  const [isCustomerVideoPlaying, setIsCustomerVideoPlaying] = useState(false);
+  const [isDocumentVisible, setIsDocumentVisible] = useState(true);
   const reduceMotion = useReducedMotion();
   const closeButtonRef = useRef(null);
+  const customerCarouselRef = useRef(null);
+  const customerDragRef = useRef({ isDragging: false, startX: 0, scrollLeft: 0 });
+  const customerInteractionTimerRef = useRef(null);
   const previousFocusRef = useRef(null);
   const customerMedia = useMemo(
     () => [...customerImages, ...customerVideos],
@@ -70,6 +76,19 @@ export default function MediaSections() {
     }, 4200);
 
     return () => window.clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      setIsDocumentVisible(!document.hidden);
+    };
+
+    handleVisibilityChange();
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
   }, []);
 
   useEffect(() => {
@@ -102,6 +121,113 @@ export default function MediaSections() {
   const goToNextOffer = () => {
     setActiveOffer((current) => (current + 1) % offerImages.length);
   };
+
+  const pauseCustomerInteraction = () => {
+    window.clearTimeout(customerInteractionTimerRef.current);
+    setIsCustomerInteracting(true);
+  };
+
+  const resumeCustomerInteraction = () => {
+    window.clearTimeout(customerInteractionTimerRef.current);
+    customerDragRef.current.isDragging = false;
+    customerInteractionTimerRef.current = window.setTimeout(() => {
+      setIsCustomerInteracting(false);
+    }, 1200);
+  };
+
+  const handleCustomerPointerDown = (event) => {
+    pauseCustomerInteraction();
+
+    if (event.pointerType !== "mouse" || event.target.closest("video")) return;
+
+    customerDragRef.current = {
+      isDragging: true,
+      startX: event.clientX,
+      scrollLeft: customerCarouselRef.current?.scrollLeft || 0,
+    };
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+  };
+
+  const handleCustomerPointerMove = (event) => {
+    if (!customerDragRef.current.isDragging || !customerCarouselRef.current) return;
+
+    const deltaX = event.clientX - customerDragRef.current.startX;
+    customerCarouselRef.current.scrollLeft =
+      customerDragRef.current.scrollLeft - deltaX;
+  };
+
+  const pauseOtherCustomerVideos = (currentVideo) => {
+    const videos = customerCarouselRef.current?.querySelectorAll("video") || [];
+
+    videos.forEach((video) => {
+      if (video !== currentVideo) {
+        video.pause();
+      }
+    });
+  };
+
+  const updateCustomerVideoPlayingState = () => {
+    const videos = customerCarouselRef.current?.querySelectorAll("video") || [];
+    const hasPlayingVideo = Array.from(videos).some(
+      (video) => !video.paused && !video.ended
+    );
+
+    setIsCustomerVideoPlaying(hasPlayingVideo);
+  };
+
+  const handleCustomerVideoPlay = (event) => {
+    pauseOtherCustomerVideos(event.currentTarget);
+    setIsCustomerVideoPlaying(true);
+  };
+
+  const handleCustomerVideoPause = () => {
+    window.setTimeout(updateCustomerVideoPlayingState, 0);
+  };
+
+  useEffect(() => {
+    const carousel = customerCarouselRef.current;
+    const isMobileCarousel = window.matchMedia("(max-width: 767px)").matches;
+    const shouldPause =
+      reduceMotion ||
+      isCustomerInteracting ||
+      isCustomerVideoPlaying ||
+      !isDocumentVisible;
+
+    if (!carousel || !isMobileCarousel || shouldPause || customerMedia.length <= 1) {
+      return undefined;
+    }
+
+    const timer = window.setInterval(() => {
+      const cards = Array.from(carousel.querySelectorAll(".customer-card"));
+
+      if (cards.length <= 1) return;
+
+      const currentIndex = cards.reduce((closestIndex, card, index) => {
+        const closestDistance = Math.abs(cards[closestIndex].offsetLeft - carousel.scrollLeft);
+        const cardDistance = Math.abs(card.offsetLeft - carousel.scrollLeft);
+
+        return cardDistance < closestDistance ? index : closestIndex;
+      }, 0);
+      const nextIndex = currentIndex + 1 >= cards.length ? 0 : currentIndex + 1;
+
+      carousel.scrollTo({
+        left: cards[nextIndex].offsetLeft,
+        behavior: "smooth",
+      });
+    }, 4000);
+
+    return () => window.clearInterval(timer);
+  }, [
+    customerMedia.length,
+    isCustomerInteracting,
+    isCustomerVideoPlaying,
+    isDocumentVisible,
+    reduceMotion,
+  ]);
+
+  useEffect(() => {
+    return () => window.clearTimeout(customerInteractionTimerRef.current);
+  }, []);
 
   return (
     <>
@@ -187,7 +313,20 @@ export default function MediaSections() {
       <motion.section id="happy-customers" className="media-section" {...sectionMotion}>
         <h2 className="section-title">Happy Customers</h2>
         {customerMedia.length > 0 ? (
-          <div className="customer-media-grid">
+          <div
+            ref={customerCarouselRef}
+            className="customer-media-grid"
+            aria-label="Happy customer media carousel"
+            onPointerDown={handleCustomerPointerDown}
+            onPointerMove={handleCustomerPointerMove}
+            onPointerUp={resumeCustomerInteraction}
+            onPointerCancel={resumeCustomerInteraction}
+            onPointerLeave={resumeCustomerInteraction}
+            onTouchStart={pauseCustomerInteraction}
+            onTouchEnd={resumeCustomerInteraction}
+            onFocus={pauseCustomerInteraction}
+            onBlur={resumeCustomerInteraction}
+          >
             {customerImages.map((item) => (
               <article className="customer-card" key={item.src}>
                 <img src={item.src} alt={item.alt} loading="lazy" />
@@ -195,7 +334,15 @@ export default function MediaSections() {
             ))}
             {customerVideos.map((item) => (
               <article className="customer-card video-card" key={item.src}>
-                <video src={item.src} preload="metadata" controls playsInline />
+                <video
+                  src={item.src}
+                  preload="metadata"
+                  controls
+                  playsInline
+                  onPlay={handleCustomerVideoPlay}
+                  onPause={handleCustomerVideoPause}
+                  onEnded={handleCustomerVideoPause}
+                />
                 <div className="video-play-badge" aria-hidden="true">
                   <Play size={20} fill="currentColor" />
                 </div>

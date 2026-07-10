@@ -4,7 +4,7 @@
   max-width: var(--container);
   margin: 0 auto;
   background: var(--color-page);
-  padding: 64px 48px;
+  padding: 52px 48px;
   overflow: hidden;
 }
 
@@ -112,7 +112,7 @@
   .features-section {
     --features-gap: 12px;
     --features-speed: 28s;
-    padding: 48px 20px;
+    padding: 42px 20px;
   }
 
   .features-ticker {
