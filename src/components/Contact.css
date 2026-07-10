@@ -1,22 +1,25 @@
 .contact-section {
-  background: white;
-  padding: 60px 48px;
+  max-width: var(--container);
+  margin: 0 auto;
+  background: var(--color-surface);
+  padding: 64px 48px;
 }
 
 .contact-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.88fr);
   gap: 24px;
 }
 
 .contact-card {
-  background: #f9fafb;
-  border: 1px solid #E3F2FD;
-  border-radius: 16px;
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
   padding: 28px;
   display: flex;
   flex-direction: column;
   gap: 24px;
+  box-shadow: var(--shadow-sm);
 }
 
 .contact-row {
@@ -29,13 +32,13 @@
 .contact-icon-static {
   width: 42px;
   height: 42px;
-  border-radius: 8px;
+  border-radius: 10px;
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #1565C0;
-  background: #E3F2FD;
+  color: var(--color-primary);
+  background: var(--color-primary-soft);
   text-decoration: none;
   margin-top: 2px;
   transition: transform 0.2s ease, color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
@@ -47,11 +50,10 @@
 
 .contact-icon-link:hover,
 .contact-icon-link:focus-visible {
-  transform: scale(1.08);
+  transform: translateY(-2px);
   color: white;
-  background: #1565C0;
-  box-shadow: 0 10px 22px rgba(21, 101, 192, 0.2);
-  outline: none;
+  background: var(--color-primary);
+  box-shadow: 0 10px 22px rgba(14, 116, 144, 0.2);
 }
 
 .contact-icon-link.instagram {
@@ -67,14 +69,14 @@
 }
 
 .contact-icon-link.whatsapp {
-  color: #128C7E;
+  color: var(--color-success);
   background: #E0F8EE;
 }
 
 .contact-icon-link.whatsapp:hover,
 .contact-icon-link.whatsapp:focus-visible {
   color: white;
-  background: #128C7E;
+  background: var(--color-success);
   box-shadow: 0 10px 22px rgba(18, 140, 126, 0.2);
 }
 
@@ -85,37 +87,42 @@
 
 .contact-label {
   font-size: 12px;
-  color: #888;
+  color: var(--color-muted);
   margin-bottom: 4px;
-  font-weight: 500;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .contact-value {
   font-size: 14px;
-  color: #1a1a1a;
-  font-weight: 500;
+  color: var(--color-text);
+  font-weight: 700;
   line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .contact-value a {
-  color: #1565C0;
+  color: var(--color-primary);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .contact-value a:hover,
 .contact-value a:focus-visible {
-  color: #0D47A1;
+  color: var(--color-primary-deep);
 }
 
 .open-badge {
-  display: block;
+  display: inline-flex;
+  width: fit-content;
   font-size: 12px;
-  color: #2E7D32;
-  margin-top: 4px;
-  font-weight: 500;
+  color: #166534;
+  background: #DCFCE7;
+  border-radius: 999px;
+  padding: 3px 9px;
+  margin-top: 6px;
+  font-weight: 800;
 }
 
 .contact-actions {
@@ -126,22 +133,23 @@
 }
 
 .contact-cta {
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   color: white;
   padding: 11px 22px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 800;
   text-decoration: none;
   cursor: pointer;
   transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .contact-cta.primary {
-  background: #1565C0;
+  background: var(--color-accent);
 }
 
 .contact-cta.secondary {
@@ -149,19 +157,18 @@
 }
 
 .contact-cta.whatsapp {
-  background: #128C7E;
+  background: var(--color-success);
 }
 
 .contact-cta:hover,
 .contact-cta:focus-visible {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 12px 24px rgba(21, 101, 192, 0.22);
-  outline: none;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(14, 116, 144, 0.22);
 }
 
 .contact-cta.primary:hover,
 .contact-cta.primary:focus-visible {
-  background: #0D47A1;
+  background: #EA580C;
 }
 
 .contact-cta.secondary:hover,
@@ -175,59 +182,63 @@
 }
 
 .map-placeholder {
-  background: #E3F2FD;
-  border-radius: 16px;
-  border: 1px solid #BBDEFB;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(255,255,255,0.82), transparent 34%),
+    linear-gradient(135deg, var(--color-primary-soft), #CFFAFE);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 260px;
+  box-shadow: var(--shadow-sm);
 }
 
 .map-inner {
   text-align: center;
+  padding: 24px;
 }
 
 .map-icon-link {
   width: 76px;
   height: 76px;
-  border-radius: 16px;
+  border-radius: 18px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #1565C0;
+  color: var(--color-primary);
   background: white;
   text-decoration: none;
   cursor: pointer;
-  box-shadow: 0 14px 28px rgba(21, 101, 192, 0.12);
+  box-shadow: var(--shadow-sm);
   transition: transform 0.2s ease, color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .map-icon-link:hover,
 .map-icon-link:focus-visible {
-  transform: scale(1.07);
+  transform: translateY(-3px);
   color: white;
-  background: #1565C0;
-  box-shadow: 0 18px 34px rgba(21, 101, 192, 0.22);
-  outline: none;
+  background: var(--color-primary);
+  box-shadow: var(--shadow-md);
 }
 
 .map-inner p {
   font-size: 14px;
-  color: #555;
+  color: var(--color-muted);
   margin: 12px 0 16px;
+  font-weight: 700;
 }
 
 .map-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #1565C0;
+  background: var(--color-primary);
   color: white;
   padding: 10px 24px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 800;
   text-decoration: none;
   cursor: pointer;
   transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
@@ -235,15 +246,14 @@
 
 .map-btn:hover,
 .map-btn:focus-visible {
-  background: #0D47A1;
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 12px 24px rgba(21, 101, 192, 0.22);
-  outline: none;
+  background: var(--color-primary-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(14, 116, 144, 0.22);
 }
 
 @media (max-width: 700px) {
   .contact-section {
-    padding: 48px 24px;
+    padding: 48px 20px 96px;
   }
 
   .contact-grid {

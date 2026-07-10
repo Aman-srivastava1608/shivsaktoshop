@@ -18,24 +18,23 @@
   color: white;
   text-decoration: none;
   cursor: pointer;
-  box-shadow: 0 14px 30px rgba(13, 71, 161, 0.24);
+  box-shadow: 0 14px 30px rgba(12, 74, 110, 0.24);
   transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .floating-action.whatsapp {
-  background: #128C7E;
+  background: var(--color-success);
 }
 
 .floating-action.call {
   display: none;
-  background: #1565C0;
+  background: var(--color-accent);
 }
 
 .floating-action:hover,
 .floating-action:focus-visible {
-  transform: translateY(-3px) scale(1.08);
-  box-shadow: 0 18px 34px rgba(13, 71, 161, 0.3);
-  outline: none;
+  transform: translateY(-3px);
+  box-shadow: 0 18px 34px rgba(12, 74, 110, 0.3);
 }
 
 .floating-action.whatsapp:hover,
@@ -45,13 +44,14 @@
 
 .floating-action.call:hover,
 .floating-action.call:focus-visible {
-  background: #0D47A1;
+  background: #EA580C;
 }
 
 @media (max-width: 700px) {
   .floating-actions {
     right: 16px;
     bottom: 16px;
+    flex-direction: row;
   }
 
   .floating-action {

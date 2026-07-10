@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Image, Play, X } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import "./MediaSections.css";
 
 const shopImageFiles = import.meta.glob(
@@ -46,10 +47,20 @@ const customerVideos = toMediaItems(customerVideoFiles, "Customer video");
 export default function MediaSections() {
   const [activeShopImage, setActiveShopImage] = useState(null);
   const [activeOffer, setActiveOffer] = useState(0);
+  const reduceMotion = useReducedMotion();
+  const closeButtonRef = useRef(null);
+  const previousFocusRef = useRef(null);
   const customerMedia = useMemo(
     () => [...customerImages, ...customerVideos],
     []
   );
+
+  const sectionMotion = {
+    initial: reduceMotion ? false : { opacity: 0, y: 20 },
+    whileInView: reduceMotion ? {} : { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.18 },
+    transition: { duration: 0.45, ease: "easeOut" },
+  };
 
   useEffect(() => {
     if (offerImages.length <= 1) return undefined;
@@ -60,6 +71,27 @@ export default function MediaSections() {
 
     return () => window.clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    if (!activeShopImage) return undefined;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setActiveShopImage(null);
+      }
+    };
+
+    previousFocusRef.current = document.activeElement;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+    window.setTimeout(() => closeButtonRef.current?.focus(), 0);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+      previousFocusRef.current?.focus?.();
+    };
+  }, [activeShopImage]);
 
   const goToPreviousOffer = () => {
     setActiveOffer((current) =>
@@ -73,7 +105,7 @@ export default function MediaSections() {
 
   return (
     <>
-      <section id="shop-gallery" className="media-section media-reveal">
+      <motion.section id="shop-gallery" className="media-section" {...sectionMotion}>
         <h2 className="section-title">Shop Gallery</h2>
         {shopImages.length > 0 ? (
           <div className="shop-gallery-grid">
@@ -92,12 +124,17 @@ export default function MediaSections() {
         ) : (
           <EmptyMediaState text="Add shop photos to public/images/shop to display them here." />
         )}
-      </section>
+      </motion.section>
 
-      <section id="latest-offers" className="media-section offers-section media-reveal">
+      <motion.section id="latest-offers" className="media-section offers-section" {...sectionMotion}>
         <h2 className="section-title">Latest Offers</h2>
         {offerImages.length > 0 ? (
-          <div className="offers-slider" aria-roledescription="carousel">
+          <div
+            className="offers-slider"
+            aria-roledescription="carousel"
+            aria-label="Latest offers"
+            aria-live="polite"
+          >
             <div
               className="offers-track"
               style={{ transform: `translateX(-${activeOffer * 100}%)` }}
@@ -127,11 +164,15 @@ export default function MediaSections() {
                 >
                   <ChevronRight size={20} aria-hidden="true" />
                 </button>
-                <div className="offer-dots" aria-hidden="true">
+                <div className="offer-dots" aria-label="Choose offer slide">
                   {offerImages.map((item, index) => (
-                    <span
+                    <button
+                      type="button"
+                      aria-label={`Show offer ${index + 1}`}
+                      aria-current={index === activeOffer ? "true" : undefined}
                       className={index === activeOffer ? "active" : ""}
                       key={item.src}
+                      onClick={() => setActiveOffer(index)}
                     />
                   ))}
                 </div>
@@ -141,9 +182,9 @@ export default function MediaSections() {
         ) : (
           <EmptyMediaState text="Add offer banners to public/images/offers to display them here." />
         )}
-      </section>
+      </motion.section>
 
-      <section id="happy-customers" className="media-section media-reveal">
+      <motion.section id="happy-customers" className="media-section" {...sectionMotion}>
         <h2 className="section-title">Happy Customers</h2>
         {customerMedia.length > 0 ? (
           <div className="customer-media-grid">
@@ -164,31 +205,45 @@ export default function MediaSections() {
         ) : (
           <EmptyMediaState text="Add customer photos or videos to public/images/customers and public/videos/customers." />
         )}
-      </section>
+      </motion.section>
 
-      {activeShopImage && (
-        <div
-          className="media-lightbox"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Shop photo preview"
-          onClick={() => setActiveShopImage(null)}
-        >
-          <button
-            className="lightbox-close"
-            type="button"
+      <AnimatePresence>
+        {activeShopImage && (
+          <motion.div
+            className="media-lightbox"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Shop photo preview"
             onClick={() => setActiveShopImage(null)}
-            aria-label="Close image preview"
+            initial={reduceMotion ? false : { opacity: 0 }}
+            animate={reduceMotion ? {} : { opacity: 1 }}
+            exit={reduceMotion ? {} : { opacity: 0 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
           >
-            <X size={22} aria-hidden="true" />
-          </button>
-          <img
-            src={activeShopImage.src}
-            alt={activeShopImage.alt}
-            onClick={(event) => event.stopPropagation()}
-          />
-        </div>
-      )}
+            <button
+              ref={closeButtonRef}
+              className="lightbox-close"
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                setActiveShopImage(null);
+              }}
+              aria-label="Close image preview"
+            >
+              <X size={22} aria-hidden="true" />
+            </button>
+            <motion.img
+              src={activeShopImage.src}
+              alt={activeShopImage.alt}
+              onClick={(event) => event.stopPropagation()}
+              initial={reduceMotion ? false : { scale: 0.96 }}
+              animate={reduceMotion ? {} : { scale: 1 }}
+              exit={reduceMotion ? {} : { scale: 0.96 }}
+              transition={{ duration: 0.18, ease: "easeOut" }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

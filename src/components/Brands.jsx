@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { FaApple } from "react-icons/fa";
 import {
   SiMotorola,
@@ -42,32 +42,16 @@ const brands = [
 ];
 
 export default function Brands() {
-  const sectionRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.25 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  const reduceMotion = useReducedMotion();
 
   return (
-    <section
+    <motion.section
       id="brands"
-      ref={sectionRef}
-      className={`brands-section ${isVisible ? "is-visible" : ""}`}
+      className="brands-section"
+      initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+      whileInView={reduceMotion ? {} : { opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.45, ease: "easeOut" }}
     >
       <h2 className="section-title">Top Smartphone Brands Available</h2>
       <div className="brand-ticker" aria-label="Available smartphone brands">
@@ -76,7 +60,7 @@ export default function Brands() {
           <BrandLogoSet ariaHidden />
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 

@@ -1,4 +1,5 @@
 import { Clock, MapPin, Navigation, Phone } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import "./Contact.css";
 
@@ -9,8 +10,17 @@ const INSTAGRAM_URL = "https://www.instagram.com/shiv_shakti_mobile_muzaffarpur"
 const MAPS_URL = "https://maps.app.goo.gl/X4XiD2iur2Dmz6H87";
 
 export default function Contact() {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <section id="contact" className="contact-section">
+    <motion.section
+      id="contact"
+      className="contact-section"
+      initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+      whileInView={reduceMotion ? {} : { opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.45, ease: "easeOut" }}
+    >
       <h2 className="section-title">Contact Us</h2>
       <div className="contact-grid">
         <div className="contact-card">
@@ -150,6 +160,6 @@ export default function Contact() {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

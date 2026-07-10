@@ -1,6 +1,11 @@
 .footer {
-  background: #0D47A1;
+  max-width: var(--container);
+  margin: 0 auto;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(249, 115, 22, 0.16), transparent 26%),
+    var(--color-primary-deep);
   padding: 0 48px;
+  border-radius: 24px 24px 0 0;
 }
 
 .footer-top {
@@ -8,7 +13,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
   flex-wrap: wrap;
   gap: 24px;
 }
@@ -16,7 +21,7 @@
 .footer-logo {
   color: white;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 800;
   margin-bottom: 6px;
   display: flex;
   align-items: center;
@@ -24,7 +29,7 @@
 }
 
 .footer-tagline {
-  color: #90CAF9;
+  color: #BAE6FD;
   font-size: 13px;
 }
 
@@ -39,7 +44,7 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  color: #BBDEFB;
+  color: #CFFAFE;
   text-decoration: none;
   font-size: 12px;
   cursor: pointer;
@@ -49,8 +54,7 @@
 .footer-contact-links a:hover,
 .footer-contact-links a:focus-visible {
   color: white;
-  transform: scale(1.04);
-  outline: none;
+  transform: translateY(-1px);
 }
 
 .footer-contact-link.whatsapp:hover,
@@ -65,7 +69,7 @@
 
 .footer-contact-link.maps:hover,
 .footer-contact-link.maps:focus-visible {
-  color: #FFE082;
+  color: #FED7AA;
 }
 
 .footer-links {
@@ -75,9 +79,10 @@
 }
 
 .footer-links a {
-  color: #BBDEFB;
+  color: #CFFAFE;
   text-decoration: none;
   font-size: 13px;
+  font-weight: 800;
   cursor: pointer;
   transition: transform 0.2s ease, color 0.2s ease;
 }
@@ -85,8 +90,7 @@
 .footer-links a:hover,
 .footer-links a:focus-visible {
   color: white;
-  transform: scale(1.05);
-  outline: none;
+  transform: translateY(-1px);
 }
 
 .footer-bottom {
@@ -95,13 +99,14 @@
 }
 
 .footer-bottom p {
-  color: #90CAF9;
+  color: #BAE6FD;
   font-size: 12px;
 }
 
 @media (max-width: 700px) {
   .footer {
-    padding: 0 24px;
+    padding: 0 20px 82px;
+    border-radius: 20px 20px 0 0;
   }
 
   .footer-top {

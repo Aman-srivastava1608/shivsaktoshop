@@ -7,6 +7,7 @@ const PHONE_LINK = "tel:+918877771149";
 const WHATSAPP_URL = "https://wa.me/918877771149";
 const INSTAGRAM_URL = "https://www.instagram.com/shiv_shakti_mobile_muzaffarpur";
 const MAPS_URL = "https://maps.app.goo.gl/X4XiD2iur2Dmz6H87";
+const CURRENT_YEAR = new Date().getFullYear();
 
 export default function Footer() {
   return (
@@ -67,7 +68,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>&copy; 2025 Shiv Shakti Mobile, Muzaffarpur, Bihar. All rights reserved.</p>
+        <p>&copy; {CURRENT_YEAR} Shiv Shakti Mobile, Muzaffarpur, Bihar. All rights reserved.</p>
       </div>
     </footer>
   );
