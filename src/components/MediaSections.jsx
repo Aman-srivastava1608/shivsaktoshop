@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, Image, Play, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Image, X } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import "./MediaSections.css";
 import Accessories from "./Accessories";
@@ -338,7 +338,8 @@ export default function MediaSections() {
             {customerVideos.map((item) => (
               <article className="customer-card video-card" key={item.src}>
                 <video
-                  src={item.src}
+                  src={`${item.src}#t=0.1`}
+                  poster={`/images/video-posters/${item.src.split("/").pop().replace(/\.[^.]+$/, ".jpg")}`}
                   preload="metadata"
                   controls
                   playsInline
@@ -346,9 +347,6 @@ export default function MediaSections() {
                   onPause={handleCustomerVideoPause}
                   onEnded={handleCustomerVideoPause}
                 />
-                <div className="video-play-badge" aria-hidden="true">
-                  <Play size={20} fill="currentColor" />
-                </div>
               </article>
             ))}
           </div>

@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef } from "react";
-import { ArrowUpRight, BadgeCheck, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import "./Accessories.css";
 
 const accessories = [
@@ -52,17 +52,11 @@ export default function Accessories() {
   return (
     <section id="accessories" className="accessories-section" aria-labelledby="accessories-title">
       <div className="accessories-heading">
-        <div>
-          <span className="accessories-eyebrow"><BadgeCheck size={16} aria-hidden="true" /> ORIGINAL ACCESSORIES • ALL BRANDS</span>
-          <h2 id="accessories-title" className="section-title">The perfect match for your phone.</h2>
-          <p>From everyday essentials to your next upgrade, explore accessories for all leading smartphone brands.</p>
-        </div>
-        <a href="https://wa.me/918877771149?text=Hi%2C%20I%27d%20like%20to%20ask%20about%20original%20mobile%20accessories." target="_blank" rel="noopener noreferrer" className="accessories-enquire">Ask about accessories <ArrowUpRight size={18} aria-hidden="true" /></a>
-      </div>
+          <h2 id="accessories-title" className="section-title">Original Mobile Accessories</h2>
       <div className="accessories-controls" aria-label="Scroll accessories">
-        <span>Swipe or drag to explore</span>
         <button type="button" onClick={() => move(-1)} aria-label="Previous accessories"><ChevronLeft size={20} /></button>
         <button type="button" onClick={() => move(1)} aria-label="Next accessories"><ChevronRight size={20} /></button>
+      </div>
       </div>
       <motion.div ref={carouselRef} className="accessories-carousel" tabIndex={0} aria-label="Original accessories. Swipe, drag or use arrow keys to explore."
         onWheel={pause}
@@ -110,7 +104,6 @@ export default function Accessories() {
           ))}
         </div>
       </motion.div>
-      <p className="accessories-note">Looking for something specific? Ask us about compatibility and available brands.</p>
     </section>
   );
 }

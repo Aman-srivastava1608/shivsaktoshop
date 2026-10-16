@@ -288,7 +288,9 @@
   }
 
   .customer-media-grid .customer-card {
-    flex: 0 0 clamp(280px, 82vw, 360px);
+    flex: 0 0 min(78vw, 290px);
+    height: auto;
+    max-height: 65svh;
     aspect-ratio: 9 / 16;
     scroll-snap-align: start;
     scroll-snap-stop: always;

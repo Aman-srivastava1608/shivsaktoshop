@@ -67,5 +67,5 @@
   .pixel-copy h2 { letter-spacing: -.5px; }
   .pixel-highlights { gap: 8px; }
   .pixel-highlights span { font-size: 11px; padding: 9px; }
-  .pixel-demo { width: 100%; }
+  .pixel-demo { width: 100%; grid-row: 1; }
 }
