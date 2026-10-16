@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Image, Play, X } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import "./MediaSections.css";
+import Accessories from "./Accessories";
 
 const shopImageFiles = import.meta.glob(
   "/public/images/shop/*.{avif,gif,jpeg,jpg,png,webp}",
@@ -251,6 +252,8 @@ export default function MediaSections() {
           <EmptyMediaState text="Add shop photos to public/images/shop to display them here." />
         )}
       </motion.section>
+
+      <Accessories />
 
       <motion.section id="latest-offers" className="media-section offers-section" {...sectionMotion}>
         <h2 className="section-title">Latest Offers</h2>

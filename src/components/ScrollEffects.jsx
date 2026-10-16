@@ -10,7 +10,7 @@ export default function ScrollEffects() {
     if (reduceMotion || !("IntersectionObserver" in window)) return;
 
     const targets = document.querySelectorAll(
-      ".section-title, .brand-logo-card, .feature-card, .shop-gallery-card, .offers-slider, .empty-media-state, .customer-card, .contact-row, .contact-actions, .map-placeholder, .footer-top, .footer-bottom"
+      ".section-title, .brand-ticker, .features-ticker, .shop-gallery-card, .offers-slider, .empty-media-state, .customer-card, .contact-row, .contact-actions, .map-placeholder, .footer-top, .footer-bottom"
     );
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(({ target, isIntersecting, boundingClientRect }) => {

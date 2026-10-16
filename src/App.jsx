@@ -1,6 +1,7 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Brands from "./components/Brands";
+import PixelOutlet from "./components/PixelOutlet";
 import MediaSections from "./components/MediaSections";
 import Features from "./components/Features";
 import Contact from "./components/Contact";
@@ -15,6 +16,7 @@ function App() {
       <Navbar />
       <Hero />
       <Brands />
+      <PixelOutlet />
       <MediaSections />
       <Features />
       <Contact />

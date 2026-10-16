@@ -71,6 +71,20 @@ body {
   rotate: 0deg;
 }
 
+/* Reveal the ticker wrapper: moving its cards outside the clipped track
+   prevents short mobile cards from ever intersecting the viewport. */
+.brand-ticker.scroll-reveal,
+.features-ticker.scroll-reveal {
+  translate: 0 18px;
+  scale: 1;
+  rotate: none;
+}
+
+.brand-ticker.scroll-visible,
+.features-ticker.scroll-visible {
+  translate: 0 0;
+}
+
 .hero-content {
   translate: 0 var(--hero-drift, 0px);
 }
@@ -98,6 +112,7 @@ body {
     rotate: none;
   }
   .hero-content { translate: none; }
+  .brand-ticker.scroll-reveal, .features-ticker.scroll-reveal { translate: none; }
   .hero-product-image { scale: none; rotate: none; }
   .section-title.scroll-reveal::after { transform: none; }
 }
