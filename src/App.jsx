@@ -6,6 +6,7 @@ import Features from "./components/Features";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import FloatingActions from "./components/FloatingActions";
+import ScrollEffects from "./components/ScrollEffects";
 import "./App.css";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <Contact />
       <Footer />
       <FloatingActions />
+      <ScrollEffects />
     </div>
   );
 }

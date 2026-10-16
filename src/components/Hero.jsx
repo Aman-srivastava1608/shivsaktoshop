@@ -1,4 +1,4 @@
-import { ArrowRight, Image, MapPin, Phone, Smartphone } from "lucide-react";
+import { ArrowRight, MapPin, Phone } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import "./Hero.css";
 
@@ -56,18 +56,25 @@ export default function Hero() {
         animate={reduceMotion ? {} : { opacity: 1, scale: 1 }}
         transition={{ duration: 0.55, delay: reduceMotion ? 0 : 0.18, ease: "easeOut" }}
       >
-        <div className="hero-media-frame" aria-hidden="true">
-          <div className="hero-media-surface">
-            <div className="hero-media-icon">
-              <Image size={34} strokeWidth={1.8} />
-            </div>
-            <div className="hero-device-outline">
-              <Smartphone size={82} strokeWidth={1.5} />
-            </div>
+        <div className="hero-spotlight">
+          <motion.img
+            className="hero-product-image"
+            src="/images/products/iphone-18-pro-max.jpg"
+            alt="Burgundy iPhone 18 Pro Max rear camera alongside the iPhone 18 Pro display"
+            width="660"
+            height="920"
+            fetchPriority="high"
+            animate={reduceMotion ? {} : { y: [0, -8, 0] }}
+            transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <div className="spotlight-label">
+            <span className="spotlight-dot" aria-hidden="true" />
+            iPhone 18 Pro Max
           </div>
-          <span className="mockup-chip">Latest Models</span>
+          <div className="spotlight-badge">Explore iPhone</div>
         </div>
       </motion.div>
     </section>
   );
 }
+
